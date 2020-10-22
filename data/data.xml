@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<questions>
+  <question answer="1024" score="5">How many bits in kilobyte?</question>
+  <question answer="1961" score="5">When did Gagarin fly to space?</question>
+  <question answer="366" score="5">How many days in leap year?</question>
+  <question answer="31" score="3">How many days in January?</question>
+  <question answer="52" score="5">How many weeks in a year?</question>
+</questions>
