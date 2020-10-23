@@ -1,19 +1,29 @@
 class Question
-  def initialize(text, answer, score)
+  def initialize(text, answer, points, variants=[], waiting_time)
     @text = text
     @answer = answer
-    @score = score.to_i
+    @points = points.to_i
+    @variants = variants
+    @waiting_time = waiting_time.to_i
   end
 
   def question_text
-    return @text
+    @text
   end
 
   def correct_answer
-    return @answer
+    @answer
   end
 
   def score
-    return @score
+    @points
+  end
+
+  def due_time
+    @waiting_time
+  end
+
+  def list_variants
+    @variants
   end
 end

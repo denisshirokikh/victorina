@@ -1,8 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <questions>
-  <question answer="1024" score="5">How many bits in kilobyte?</question>
-  <question answer="1961" score="5">When did Gagarin fly to space?</question>
-  <question answer="366" score="5">How many days in leap year?</question>
-  <question answer="31" score="3">How many days in January?</question>
-  <question answer="52" score="5">How many weeks in a year?</question>
+  <question minutes="5" points="5">
+    <text>How many bytes in kilobyte?</text>
+    <variants>
+      <variant>1000</variant>
+      <variant>2048</variant>
+      <variant right="true">1024</variant>
+      <variant>512</variant>
+    </variants>
+  </question>
+  <question minutes="5" points="3">
+    <text>When did Gagarin fly to space</text>
+    <variants>
+      <variant>1000</variant>
+      <variant>2048</variant>
+      <variant right="true">1961</variant>
+      <variant>1912</variant>
+    </variants>
+  </question>
+  <question minutes="5" points="5">
+    <text>How many days in leap year?</text>
+    <variants>
+      <variant>1000</variant>
+      <variant>365</variant>
+      <variant right="true">366</variant>
+      <variant>350</variant>
+    </variants>
+  </question>
+  <question minutes="5" points="5">
+    <text>How many days in January?</text>
+    <variants>
+      <variant>28</variant>
+      <variant>30</variant>
+      <variant right="true">31</variant>
+      <variant>29</variant>
+    </variants>
+  </question>
+  <question minutes="5" points="5">
+    <text>How many weeks in a year?</text>
+    <variants>
+      <variant>55</variant>
+      <variant>50</variant>
+      <variant right="true">52</variant>
+      <variant>51</variant>
+    </variants>
+  </question>
 </questions>
