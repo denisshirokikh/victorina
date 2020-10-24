@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <questions>
-  <question minutes="5" points="5">
+  <question minutes="10" points="5">
     <text>How many bytes in kilobyte?</text>
     <variants>
       <variant>1000</variant>
@@ -9,7 +9,7 @@
       <variant>512</variant>
     </variants>
   </question>
-  <question minutes="5" points="3">
+  <question minutes="10" points="3">
     <text>When did Gagarin fly to space</text>
     <variants>
       <variant>1000</variant>
@@ -18,7 +18,7 @@
       <variant>1912</variant>
     </variants>
   </question>
-  <question minutes="5" points="5">
+  <question minutes="10" points="5">
     <text>How many days in leap year?</text>
     <variants>
       <variant>1000</variant>
@@ -27,7 +27,7 @@
       <variant>350</variant>
     </variants>
   </question>
-  <question minutes="5" points="5">
+  <question minutes="10" points="5">
     <text>How many days in January?</text>
     <variants>
       <variant>28</variant>
@@ -36,7 +36,7 @@
       <variant>29</variant>
     </variants>
   </question>
-  <question minutes="5" points="5">
+  <question minutes="10" points="5">
     <text>How many weeks in a year?</text>
     <variants>
       <variant>55</variant>
