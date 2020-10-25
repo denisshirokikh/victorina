@@ -14,7 +14,6 @@ end
 
 game_set = Parser.from_file("#{__dir__}/data/data.xml")
 puts "Let's play..please answer my questions:"
-puts game_set.to_s
 
 counter = 0
 score = 0
