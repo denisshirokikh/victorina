@@ -1,6 +1,7 @@
-require_relative 'lib/question'
-require_relative 'lib/answer'
+require_relative 'lib/parser'
+require_relative 'lib/victorina'
 require 'rexml/document'
+require 'timeout'
 
 if (Gem.win_platform?)
   Encoding.default_external = Encoding.find(Encoding.locale_charmap)
@@ -11,45 +12,35 @@ if (Gem.win_platform?)
   end
 end
 
-file = File.new("#{__dir__}/data/data.xml", encoding: 'UTF-8')
-doc = REXML::Document.new(file)
-file.close
-
-game_set =
-    doc.elements['questions'].elements.map do |item|
-      right_answer = ''
-      item.elements.each('./variants/variant/') { |variant| right_answer = variant.text if variant.attributes['right'] }
-      Question.new(
-          item.elements['text'].text,
-          item.attributes['points'],
-          item.attributes['minutes'],
-          Answer.new(right_answer, item.elements['variants'].elements.map(&:text))
-      )
-    end
-
+game_set = Parser.from_file("#{__dir__}/data/data.xml")
 puts "Let's play..please answer my questions:"
+puts game_set.to_s
 
 counter = 0
 score = 0
 
 game_set.sample(5).each do |try|
-  time_start = Time.now
-  puts "#{try.text} (You have 5 sec for answer)"
-  "#{try.answers.list.each {|variant| puts variant}}"
-  user_input = STDIN.gets.to_i
-  time_answer = Time.now
-  if user_input == try.answers.right_answer.to_i &&
-      time_answer - time_start <= try.wait_time
-    puts "That's right! You got (#{try.points} points)"
-    counter += 1
-    score += try.points
-  elsif Time.now > time_start + try.wait_time
-    puts "Your time is up! Right answer: #{try.answers.right_answer}"
-  else
-    puts "Wrong. Right answer: #{try.answers.right_answer}"
+  puts try.ask_question
+  puts try.answers
+  begin
+    Timeout::timeout(try.wait_time) do
+    user_input = STDIN.gets.to_i
+
+      if try.correct_answer?(user_input)
+        puts "That's right! You got (#{try.points} points)"
+        counter += 1
+        score += try.points
+      else
+        puts "Wrong. Right answer: #{try.right_answer}"
+
+      end
+    end
+    rescue
+      TimeoutError
+      puts "Your time is up! Right answer: #{try.right_answer}"
+
+    end
   end
-end
 
 puts "Right answers: #{counter} from 5"
 puts "You got #{score} points"
-
