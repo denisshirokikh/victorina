@@ -11,7 +11,7 @@ module Parser
     doc.elements['questions'].elements.map do |item|
       right_answer = ''
       item.elements.each('./variants/variant/') { |variant| right_answer = variant.text if variant.attributes['right'] }
-      Victorina.new(
+      Question.new(
           item.elements['text'].text,
           right_answer,
           item.attributes['points'].to_s,

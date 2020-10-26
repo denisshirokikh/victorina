@@ -1,7 +1,9 @@
 require_relative 'lib/parser'
 require_relative 'lib/victorina'
+require_relative 'lib/question'
 require 'rexml/document'
 require 'timeout'
+require 'pry'
 
 if (Gem.win_platform?)
   Encoding.default_external = Encoding.find(Encoding.locale_charmap)
@@ -12,34 +14,32 @@ if (Gem.win_platform?)
   end
 end
 
-game_set = Parser.from_file("#{__dir__}/data/data.xml")
+QUESTIONS_COUNT = 5
+
+data = Parser.from_file("#{__dir__}/data/data.xml")
+game_set = Victorina.new(data.sample(QUESTIONS_COUNT))
+
 puts "Let's play..please answer my questions:"
 
-counter = 0
-score = 0
-
-game_set.sample(5).each do |try|
-  puts try.ask_question
-  puts try.answers
+game_set.questions.each do |question|
+  puts question
   begin
-    Timeout::timeout(try.wait_time) do
+    Timeout::timeout(question.wait_time) do
     user_input = STDIN.gets.to_i
 
-      if try.correct_answer?(user_input)
-        puts "That's right! You got (#{try.points} points)"
-        counter += 1
-        score += try.points
+      if question.correct_answer?(user_input)
+        puts "That's right! You got (#{question.points} points)"
+        game_set.counter
+        game_set.score(question.points)
       else
-        puts "Wrong. Right answer: #{try.right_answer}"
-
+        puts "Wrong. Right answer: #{question.right_answer}"
       end
     end
     rescue
       TimeoutError
-      puts "Your time is up! Right answer: #{try.right_answer}"
+      puts "Your time is up! Right answer: #{question.right_answer}"
 
     end
   end
 
-puts "Right answers: #{counter} from 5"
-puts "You got #{score} points"
+puts game_set.result
