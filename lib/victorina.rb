@@ -1,10 +1,10 @@
 class Victorina
-  attr_reader :questions
-  attr_accessor :score, :counter
+  attr_reader :questions, :points, :right_answers
+
   def initialize(questions = [])
     @questions = questions
-    @score = 0
-    @counter = 0
+    @right_answers = 0
+    @points = 0
   end
 
   def size
@@ -13,18 +13,14 @@ class Victorina
 
   def result
     <<~RESULT
-      You got #{@score} points!
-      You answered #{counter} from #{size}!
+      You got #{@points} points!
+      You answered #{@right_answers} from #{size}!
     RESULT
   end
 
-  def counter
-    @counter += 1
-  end
-
-  def score(points)
-    @score += points
+  def admit_points_and_right_answers(points, right_answers)
+    @points += points
+    @right_answers += 1
   end
 
 end
-

@@ -1,5 +1,6 @@
 class Question
   attr_reader :text, :right_answer, :points, :wait_time, :answers
+
   def initialize(text, right_answer, points, wait_time, answers = [] )
     @text = text
     @right_answer = right_answer
