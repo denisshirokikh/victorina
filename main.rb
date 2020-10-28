@@ -25,17 +25,16 @@ game_set.questions.each do |question|
   puts question
   begin
     Timeout::timeout(question.wait_time) do
-      user_input = STDIN.gets.to_i
+      user_input = STDIN.gets.chomp
 
       if question.correct_answer?(user_input)
         puts "That's right! You got (#{question.points} points)"
-        game_set.admit_points_and_right_answers(question.points, game_set.right_answers)
+        game_set.admit_points_and_right_answers(question.points)
       else
         puts "Wrong. Right answer: #{question.right_answer}"
       end
     end
-  rescue
-    TimeoutError
+  rescue TimeoutError
     puts "Your time is up! Right answer: #{question.right_answer}"
   end
 end

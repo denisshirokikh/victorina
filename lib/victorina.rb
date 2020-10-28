@@ -1,7 +1,7 @@
 class Victorina
   attr_reader :questions, :points, :right_answers
 
-  def initialize(questions = [])
+  def initialize(questions)
     @questions = questions
     @right_answers = 0
     @points = 0
@@ -18,9 +18,8 @@ class Victorina
     RESULT
   end
 
-  def admit_points_and_right_answers(points, right_answers)
+  def admit_points_and_right_answers(points)
     @points += points
     @right_answers += 1
   end
-
 end
