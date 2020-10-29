@@ -10,10 +10,10 @@ module Parser
       right_answer = ''
       item.elements.each('./variants/variant/') { |variant| right_answer = variant.text if variant.attributes['right'] }
       Question.new(
-          item.elements['text'].text,
-          right_answer, item.attributes['points'].to_s,
-          item.attributes['minutes'].to_s,
-          item.elements['variants'].elements.map(&:text)
+        item.elements['text'].text,
+        right_answer, item.attributes['points'].to_s,
+        item.attributes['minutes'].to_s,
+        item.elements['variants'].elements.map(&:text)
       )
     end
   end
